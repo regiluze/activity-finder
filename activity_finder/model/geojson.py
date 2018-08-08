@@ -8,3 +8,6 @@ class GeoJsonFormater(object):
         features = [Feature(geometry=Point((entity.lat, entity.long)), properties=entity.properties) for entity in entities]
         return FeatureCollection(features)
 
+    def to_feature(self, entity):
+        pass
+
