@@ -1,0 +1,53 @@
+[
+     {
+        "name": "Museo Nacional del Prado",
+        "opening_hours": {
+            "mo": ["10:00-20:00"],
+            "tu": ["10:00-20:00"],
+            "we": ["10:00-20:00"],
+            "th": ["10:00-20:00"],
+            "fr": ["10:00-20:00"],
+            "sa": ["10:00-20:00"],
+            "su": ["10:00-19:00"]
+        },
+        "hours_spent": 3,
+        "category": "cultural",
+        "location": "indoors",
+        "district": "Retiro",
+        "latlng": [40.413679,-3.6915639]
+    },
+    {
+        "name": "Palacio Real",
+        "opening_hours": {
+            "mo": ["10:00-20:00"],
+            "tu": ["10:00-20:00"],
+            "we": ["10:00-20:00"],
+            "th": ["10:00-20:00"],
+            "fr": ["10:00-20:00"],
+            "sa": ["10:00-20:00"],
+            "su": ["10:00-20:00"]
+        },
+        "hours_spent": 1.5,
+        "category": "cultural",
+        "location": "outdoors",
+        "district": "Centro",
+        "latlng": [40.4173423,-3.7144063]
+    },
+    {
+       "name": "Parque del Oeste",
+       "opening_hours": {
+           "mo": ["00:00-23:59"],
+           "tu": ["00:00-23:59"],
+           "we": ["00:00-23:59"],
+           "th": ["00:00-23:59"],
+           "fr": ["00:00-23:59"],
+           "sa": ["00:00-23:59"],
+           "su": ["00:00-23:59"]
+       },
+       "hours_spent": 1,
+       "category": "nature",
+       "location": "outdoors",
+       "district": "Chamberí",
+       "latlng": [40.4273119,-3.7223896]
+   }
+]
