@@ -20,10 +20,11 @@ with describe('recommend activity action specs'):
 
     with context('when asking a recommendation'):
         with it('returns recommended activity in geoJson format'):
-            when(self.activities_service_stub).find_by({'category':'irrelevant'}).returns(FAKE_ACTIVITY_LIST_SAMPLE)
+            data = {'date':'09/08/2018', 'category':'irrelevant'}
+            when(self.activities_service_stub).recommend_activity(data).returns(FAKE_ACTIVITY_LIST_SAMPLE)
             when(self.geoJson_formater).to_feature(FAKE_ACTIVITY_LIST_SAMPLE).returns(FAKE_GEOJSON_RESULT)
 
-            recommended_activity = self.recommend_activity_action.execute({'date':'09/08/2018', 'category':'irrelevant'})
+            recommended_activity = self.recommend_activity_action.execute(data)
 
             expect(recommended_activity).to(equal(FAKE_GEOJSON_RESULT))
 

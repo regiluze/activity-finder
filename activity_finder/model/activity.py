@@ -30,3 +30,6 @@ class ActivitiesService(object):
     def find_by(self, filter=None):
         activities = self._activities_repository.find_by(filter)
         return [Activity(**activity) for activity in activities]
+
+    def recommend_activity(self, filter):
+        pass

@@ -8,5 +8,5 @@ class RecommendActivityAction(object):
         self._geoJsonFormater = geoJsonFormater
 
     def execute(self, data):
-        available_activities = self._activities_service.find_by({'category': data['category']})
+        available_activities = self._activities_service.recommend_activity(filter=data)
         return self._geoJsonFormater.to_feature(available_activities)
