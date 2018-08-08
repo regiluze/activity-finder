@@ -48,30 +48,3 @@ with describe('geojson formater specs'):
                                                                                  geometry=have_keys(type='Point', coordinates=contain_exactly(1, 2)),
                                                                                  properties=equal({'foo':'var'}))))
 
-#        with context('when formating a list of activities'):
-#            with it('returns formated feature collection with activities as feature'):
-#    {
-#        "name": "El Rastro",
-#        "opening_hours": {
-#            "mo": [],
-#            "tu": [],
-#            "we": [],
-#            "th": [],
-#            "fr": [],
-#            "sa": [],
-#            "su": ["09:00-15:00"]
-#        },
-#        "hours_spent": 2.5,
-#        "category": "shopping",
-#        "location": "outdoors",
-#        "district": "Centro",
-#        "latlng": [40.4087357,-3.7081466]
-#    },
-#    entity_list = [Activity(name='El Rastro', opening_hours={'mo': [], 'tu':[], 'we':[], 'th':[], 'fr': [], 'sa': [], 'su': ['09:00-15:00']}, hours_spent=2.5, category='shopping', location='outdoors', disctrict='Centro'), 'latlng']
-#
-#                geoJson_result = self.formater.to_feature_collection(entity_list)
-#
-#                expect(geoJson_result.get('features')).to(contain_only(have_keys(type='Feature',
-#                                                                                 geometry=have_keys(type='Point', coordinates=contain_exactly(1, 2)),
-#                                                                                 properties=equal({'foo':'var'}))))
-#
