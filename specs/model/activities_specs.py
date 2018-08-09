@@ -40,6 +40,7 @@ with describe('Activity entity specs'):
                                                               location='outdoors',
                                                               district='Centro'))
 
+
 ACTIVITY_1 = {
         "name": "El Rastro",
         "opening_hours": {
@@ -61,19 +62,55 @@ ACTIVITY_1 = {
 ACTIVITY_2 = {
         "name": "Palacio Real",
         "opening_hours": {
-            "mo": ["10:00-20:00"],
-            "tu": ["10:00-20:00"],
-            "we": ["10:00-20:00"],
-            "th": ["10:00-20:00"],
-            "fr": ["10:00-20:00"],
-            "sa": ["10:00-20:00"],
-            "su": ["10:00-20:00"]
+            "mo": ["11:00-20:00"],
+            "tu": ["11:00-20:00"],
+            "we": ["11:00-20:00"],
+            "th": ["11:00-20:00"],
+            "fr": ["11:00-20:00"],
+            "sa": ["11:00-20:00"],
+            "su": ["11:00-20:00"]
         },
         "hours_spent": 1.5,
         "category": "cultural",
         "location": "outdoors",
         "district": "Centro",
         "latlng": [40.4173423,-3.7144063]
+}
+
+ACTIVITY_3 = {
+        "name": "El Retiro",
+        "opening_hours": {
+            "mo": ["00:00-23:59"],
+            "tu": ["00:00-23:59"],
+            "we": ["00:00-23:59"],
+            "th": ["00:00-23:59"],
+            "fr": ["00:00-23:59"],
+            "sa": ["00:00-23:59"],
+            "su": ["00:00-23:59"]
+        },
+        "hours_spent": 1.5,
+        "category": "nature",
+        "location": "outdoors",
+        "district": "Retiro",
+        "latlng": [40.4154589,-3.6834559]
+}
+
+ACTIVITY_4 = {
+        "name": "Casa de Campo",
+        "opening_hours": {
+            "mo": ["15:00-23:59"],
+            "tu": ["15:00-23:59"],
+            "we": ["15:00-23:59"],
+            "th": ["15:00-23:59"],
+            "fr": ["15:00-23:59"],
+            "sa": ["15:00-23:59"],
+            "su": ["15:00-23:59"]
+        },
+        "hours_spent": 1,
+        "category": "nature",
+        "location": "outdoors",
+        "district": "Latina",
+        "latlng": [40.4202185,-3.7481842]
 }
 
 with describe('Activities service specs'):
@@ -110,4 +147,36 @@ with describe('Activities service specs'):
                 available_activities = self.activities_service.find_by({'category':'cultural'})
 
                 expect(available_activities).to(contain_only(have_properties(properties=have_keys(name='Palacio Real'))))
+
+    with context('when there are four activities'):
+        with before.each:
+            when(self.activities_repository_stub).find_by({'category':'nature'}).returns([ACTIVITY_4, ACTIVITY_3])
+
+        with context('when recommending an activity by category and date range'):
+            with it('returns Activity class'):
+                filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'10:00', 'finish_time':'15:00'}
+                recommended_activity = self.activities_service.recommend_activity(filter)
+
+                expect(recommended_activity).to(be_a(Activity))
+
+            with it('returns category and time range matching category'):
+                filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'10:00', 'finish_time':'15:00'}
+
+                recommended_activity = self.activities_service.recommend_activity(filter)
+
+                expect(recommended_activity).to(have_properties(properties=have_keys(name='El Retiro')))
+
+            with context('when time range is smaller than activity hours spent time'):
+                with it('returns none'):
+                    filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'10:00', 'finish_time':'10:30'}
+                    recommended_activity = self.activities_service.recommend_activity(filter)
+
+                    expect(recommended_activity).to(be_none)
+
+            with context('when there are more than one recommend match'):
+                with it('returns the activity with bigger hours spent'):
+                    filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'15:00', 'finish_time':'20:30'}
+                    recommended_activity = self.activities_service.recommend_activity(filter)
+
+                    expect(recommended_activity).to(have_properties(properties=have_keys(name='El Retiro')))
 
