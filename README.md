@@ -76,6 +76,11 @@ In this case, I had a doubt about the time range input parameter, how would it l
 
 After implementing bussiness core, I started to implement a simple web API to expose the actions. To do this I use Flask web micro-framework.
 
+*** For the future
+
+    * Do not recommend an outdoors activity on a rainy day: I would add a new collaborator to activity service with weather information. This service would be integrated with a third party service to know if day weather is rainy.
+    * Support getting information about activities in multiple cities: I would change the activity load from file repository and instead of load a specific json file, it would load all json files in a specific folder. I would also add a new query parameter in both action to be able to filter by city name.
+    * Extend the recommendation API to fill the given time range with multiple activities: In this case I would add new action and a new endpoint. After implementing it I sure that could be possible to do a refactor in existing recommend activity action.
 
 
 
