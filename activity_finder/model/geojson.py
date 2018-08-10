@@ -9,5 +9,6 @@ class GeoJsonFormater(object):
         return FeatureCollection(features)
 
     def to_feature(self, entity):
-        return Feature(geometry=Point((entity.lat, entity.long)), properties=entity.properties)
+        if entity is not None:
+            return Feature(geometry=Point((entity.lat, entity.long)), properties=entity.properties)
 

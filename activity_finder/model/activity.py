@@ -46,7 +46,6 @@ class Activity(object):
         start_time_absolute_minutes = self._get_time_in_absolute_minutes(start_time)
         finish_time_absolute_minutes = self._get_time_in_absolute_minutes(finish_time)
         activity_hours_spent_minutes = self._hours_spent*60
-        print('>>>> activity hours spent ', activity_hours_spent_minutes)
         return (finish_time_absolute_minutes - start_time_absolute_minutes) > activity_hours_spent_minutes
 
     def _get_time_in_absolute_minutes(self, time):

@@ -61,3 +61,10 @@ with describe('geojson formater specs'):
             expect(geoJson_result).to(have_keys(type='Feature',
                                                 geometry=have_keys(type='Point', coordinates=contain_exactly(1, 2)),
                                                 properties=equal({'foo':'var'})))
+
+        with context('when input entity is None'):
+            with it('returns None'):
+
+                geoJson_result = self.formater.to_feature(None)
+
+                expect(geoJson_result).to(be_none)
