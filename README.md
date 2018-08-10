@@ -45,11 +45,11 @@ mkvirtualenv -p /usr/local/bin/python3.5 activity-finder
 ## Implementation process
 
 The tools used to build the project are:
-⋅⋅* Python 3.5
-⋅⋅* Mamba: BDD/TDD Test framework
-..* expects: Assertion matcher
-..* doublex: Mocks framework
-..* Flask: Web micro-framework
+⋅⋅* Python 3.5.
+⋅⋅* Mamba: BDD/TDD Test framework.
+..* expects: Assertion matcher.
+..* doublex: Mocks framework.
+..* Flask: Web micro-framework.
 
 To implement this project I used TDD outside-in technique and IDD(Interaction Driven Design) design to organize the code.
 I applied IDD on my last projects and I'm pretty happy with it, at the begining because I liked how the code is organized and afterwards because it easier to apply TDD outside-in technique.
