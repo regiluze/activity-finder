@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import http
 from flask import Flask, request
 
 from activity_finder.actions import factory as actions_factory
@@ -16,8 +17,11 @@ def find_activities():
 @app.route("/activity/recommend")
 def recommend_activity():
     filter = build_filter_from_query_params(['date', 'start_time', 'finish_time', 'category'])
-    activities = actions_factory.recommend_activity_action().execute(filter)
-    return json.dumps(activities)
+    try:
+        activity = actions_factory.recommend_activity_action().execute(filter)
+        return json.dumps(activity)
+    except:
+        return ('', http.client.NO_CONTENT)
 
 def build_filter_from_query_params(expected_params_names):
     result_filter = {}

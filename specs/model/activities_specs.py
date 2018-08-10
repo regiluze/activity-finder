@@ -5,7 +5,7 @@ from doublex import *
 from expects import *
 from doublex_expects import *
 
-from activity_finder.model.activity import Activity, ActivitiesService
+from activity_finder.model.activity import Activity, ActivitiesService, NotFoundRecommendationError
 
 
 LAT = 40.4992
@@ -166,12 +166,6 @@ with describe('Activities service specs'):
 
                 expect(recommended_activity).to(have_properties(properties=have_keys(name='El Retiro')))
 
-            with context('when time range is smaller than activity hours spent time'):
-                with it('returns none'):
-                    filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'10:00', 'finish_time':'10:30'}
-                    recommended_activity = self.activities_service.recommend_activity(filter)
-
-                    expect(recommended_activity).to(be_none)
 
             with context('when there are more than one recommend match'):
                 with it('returns the activity with bigger hours spent'):
@@ -179,4 +173,20 @@ with describe('Activities service specs'):
                     recommended_activity = self.activities_service.recommend_activity(filter)
 
                     expect(recommended_activity).to(have_properties(properties=have_keys(name='El Retiro')))
+
+        with context('when there is not any match'):
+            with it('throws a NotFoundRecommendationError'):
+                filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'15:00', 'finish_time':'15:05'}
+                def callback():
+                    recommended_activity = self.activities_service.recommend_activity(filter)
+
+                expect(callback).to(raise_error(NotFoundRecommendationError))
+
+            with context('when time range is smaller than activity hours spent time'):
+                with it('throws a NotFoundRecommendationError'):
+                    filter = {'category': 'nature', 'date':'08/08/2018', 'start_time':'10:00', 'finish_time':'10:30'}
+                    def callback():
+                        recommended_activity = self.activities_service.recommend_activity(filter)
+
+                    expect(callback).to(raise_error(NotFoundRecommendationError))
 

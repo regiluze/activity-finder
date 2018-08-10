@@ -70,5 +70,9 @@ class ActivitiesService(object):
         recommended_activities.sort(key=lambda x: x.properties['hours_spent'], reverse=True)
         if recommended_activities:
             return recommended_activities[0]
+        else:
+            raise NotFoundRecommendationError()
 
 
+class NotFoundRecommendationError(Exception):
+    pass
