@@ -41,7 +41,7 @@ mkvirtualenv -p /usr/local/bin/python3.5 activity-finder
     * Find activities: http://127.0.0.1:5000/activity/find?category=culture&location=outdoors&district=Centro
         - Parameters: category, location and district
 
-    * Recommend activity: http://127.0.0.1:5000/activity/recommend?category=culture&date=08/08/2018&start_time=10:00&fisnish_time=15:00
+    * Recommend activity: http://127.0.0.1:5000/activity/recommend?category=nature&date=08/08/2018&start_time=10:00&finish_time=15:00
         - Parameters: date, start_time, finish_time and category
 
 
