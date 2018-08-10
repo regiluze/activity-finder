@@ -76,6 +76,8 @@ In this case, I had a doubt about the time range input parameter, how would it l
 
 After implementing bussiness core, I started to implement a simple web API to expose the actions. To do this I use Flask web micro-framework.
 
+When I was testing the whole application I realized that when I request a recommend activity and there is not a match, it was returning a 500 internal server error, so I changed the behaviour of the service method and when there isn't any match, instead of return None it raises an exception. In this way we can manage the error in the web part and return the correct statue code.
+
 *** For the future
 
     * Do not recommend an outdoors activity on a rainy day: I would add a new collaborator to activity service with weather information. This service would be integrated with a third party service to know if day weather is rainy.
