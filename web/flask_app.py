@@ -20,8 +20,10 @@ def recommend_activity():
     try:
         activity = actions_factory.recommend_activity_action().execute(filter)
         return json.dumps(activity)
-    except:
+    except NotFoundRecommendationError as exc:
         return ('', http.client.NO_CONTENT)
+    except Exception:
+        return ('', http.client.INTERNAL_SERVER_ERROR)
 
 def build_filter_from_query_params(expected_params_names):
     result_filter = {}
