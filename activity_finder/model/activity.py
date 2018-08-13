@@ -25,9 +25,12 @@ class Activity(object):
         return self._properties
 
     def is_open_at(self, weekday, start_time, finish_time):
-        if self._time_is_before_or_the_same(self._get_open_time_on_weekday(weekday), start_time) and self._time_is_before_or_the_same(finish_time, self._get_close_time_on_weekday(weekday)) and self._time_range_bigger_than_activity_hours(start_time, finish_time):
+        if self._is_open_on_weekday(weekday) and self._time_is_before_or_the_same(self._get_open_time_on_weekday(weekday), start_time) and self._time_is_before_or_the_same(finish_time, self._get_close_time_on_weekday(weekday)) and self._time_range_bigger_than_activity_hours(start_time, finish_time):
              return True
         return False
+
+    def _is_open_on_weekday(self, weekday):
+        return len(self._opening_hours[weekday.lower()[:2]]) > 0
 
     def _get_open_time_on_weekday(self, weekday):
         weekday_opening_hours = self._opening_hours[weekday.lower()[:2]]

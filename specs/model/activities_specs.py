@@ -64,7 +64,7 @@ ACTIVITY_2 = {
         "opening_hours": {
             "mo": ["11:00-20:00"],
             "tu": ["11:00-20:00"],
-            "we": ["11:00-20:00"],
+            "we": [],
             "th": ["11:00-20:00"],
             "fr": ["11:00-20:00"],
             "sa": ["11:00-20:00"],
@@ -148,9 +148,9 @@ with describe('Activities service specs'):
 
                 expect(available_activities).to(contain_only(have_properties(properties=have_keys(name='Palacio Real'))))
 
-    with context('when there are four activities'):
+    with context('when there are three activities'):
         with before.each:
-            when(self.activities_repository_stub).find_by({'category':'nature'}).returns([ACTIVITY_4, ACTIVITY_3])
+            when(self.activities_repository_stub).find_by({'category':'nature'}).returns([ACTIVITY_4, ACTIVITY_3, ACTIVITY_2])
 
         with context('when recommending an activity by category and date range'):
             with it('returns Activity class'):
