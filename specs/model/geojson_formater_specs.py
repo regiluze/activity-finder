@@ -45,7 +45,7 @@ with describe('geojson formater specs'):
                 geoJson_result = self.formater.to_feature_collection(entity_list)
 
                 expect(geoJson_result.get('features')).to(contain_only(have_keys(type='Feature',
-                                                                                 geometry=have_keys(type='Point', coordinates=contain_exactly(1, 2)),
+                                                                                 geometry=have_keys(type='Point', coordinates=contain_exactly(2, 1)),
                                                                                  properties=equal({'foo':'var'}))))
 
     with context('when formating to a feature'):
@@ -59,5 +59,5 @@ with describe('geojson formater specs'):
             geoJson_result = self.formater.to_feature(FakeEntity(coordinates=[1, 2], properties={'foo': 'var'}))
 
             expect(geoJson_result).to(have_keys(type='Feature',
-                                                geometry=have_keys(type='Point', coordinates=contain_exactly(1, 2)),
+                                                geometry=have_keys(type='Point', coordinates=contain_exactly(2, 1)),
                                                 properties=equal({'foo':'var'})))
